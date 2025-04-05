@@ -1,15 +1,15 @@
 {
   "Version": 1,
-  "Hash": "IpgmzMFSarP225FZJ4+vuYLNpIJNgoV3vJ3Lm6qqE04=",
-  "Source": "AuthorizationService",
-  "BasePath": "_content/AuthorizationService",
+  "Hash": "i4tKqmIXPsQU6vx2vx4Pn8jOCnJ6Nkd4RHncjJcXePQ=",
+  "Source": "AuthorizationService.Api",
+  "BasePath": "_content/AuthorizationService.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
+      "Identity": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.Domain\\AuthorizationService.Domain.csproj",
       "Version": 2,
-      "Source": "AuthorizationService.DAL",
+      "Source": "AuthorizationService.Domain",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
       "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",

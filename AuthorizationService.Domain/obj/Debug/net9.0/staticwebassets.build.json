@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "wvnnCwVmpe/JvF9Ltp//NQUbto0FLOgkZmXh45aqHTg=",
-  "Source": "AuthorizationService.DAL",
-  "BasePath": "_content/AuthorizationService.DAL",
+  "Hash": "bIspYnfSNB3JwdHPmWDt0f/CrCr6FPsdegpKW06i2LQ=",
+  "Source": "AuthorizationService.Domain",
+  "BasePath": "_content/AuthorizationService.Domain",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

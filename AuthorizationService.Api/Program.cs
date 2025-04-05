@@ -1,5 +1,6 @@
 using AuthorizationService;
 using AuthorizationService.Api.Endpoints;
+using AuthorizationService.Application.Handlers;
 using AuthorizationService.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -84,6 +85,14 @@ builder.Services.AddOpenIddict()
         options.UseAspNetCore();
     });
 
+// Добавляе медиатр
+builder.Services.AddMediatR(options =>
+{
+    options.RegisterServicesFromAssemblyContaining<DIDetector>();
+});
+
+
+// Build Application
 var app = builder.Build();
 
 // Open Api
@@ -100,7 +109,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// 🔹 Регистрация middleware - порядок важен!
+// 🔹 Регистрация middleware
 app.UseRouting();
 app.UseAuthentication();     
 app.UseAuthorization();
