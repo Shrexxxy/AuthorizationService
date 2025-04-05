@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Shrexy\\RiderProjects\\MicroPetService\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj": {}
+    "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Shrexy\\RiderProjects\\MicroPetService\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj": {
+    "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Shrexy\\RiderProjects\\MicroPetService\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
         "projectName": "AuthorizationService.DAL",
-        "projectPath": "C:\\Users\\Shrexy\\RiderProjects\\MicroPetService\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
+        "projectPath": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
         "packagesPath": "C:\\Users\\Shrexy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Shrexy\\RiderProjects\\MicroPetService\\AuthorizationService\\AuthorizationService.DAL\\obj\\",
+        "outputPath": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -37,9 +37,11 @@
           "https://gitlab.joytech.store/api/v4/projects/161/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/169/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/171/packages/nuget/index.json": {},
+          "https://gitlab.joytech.store/api/v4/projects/207/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/227/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/239/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/241/packages/nuget/index.json": {},
+          "https://gitlab.joytech.store/api/v4/projects/245/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/43/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/6/packages/nuget/index.json": {},
           "https://gitlab.joytech.store/api/v4/projects/63/packages/nuget/index.json": {},
@@ -69,19 +71,19 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[9.0.4, )"
             },
             "OpenIddict.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.1.0, )"
+              "version": "[6.2.0, )"
             }
           },
           "imports": [

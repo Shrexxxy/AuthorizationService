@@ -27,7 +27,7 @@ public static class AuthEndpoints
 
     private static async Task<IResult> RegisterAsync(
         [FromBody] RegisterModel model, 
-        UserManager<IdentityUser> userManager)
+        [FromServices] UserManager<IdentityUser> userManager)
     {
         var user = new IdentityUser { UserName = model.Email, Email = model.Email };
         var result = await userManager.CreateAsync(user, model.Password);
@@ -36,7 +36,7 @@ public static class AuthEndpoints
 
     private static async Task<IResult> LoginAsync(
         [FromBody] LoginModel model, 
-        UserManager<IdentityUser> userManager)
+        [FromServices] UserManager<IdentityUser> userManager)
     {
         var user = await userManager.FindByEmailAsync(model.Email);
         if (user == null || !await userManager.CheckPasswordAsync(user, model.Password))
