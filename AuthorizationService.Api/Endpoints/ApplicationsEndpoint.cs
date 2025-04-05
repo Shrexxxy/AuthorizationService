@@ -11,7 +11,7 @@ public static class ApplicationsEndpoint
     {
         var api = app.MapGroup("/api/applications");
 
-        api.MapPost("/", CreateApplicationAsync)
+        api.MapPost("/create", CreateApplicationAsync)
             .WithOpenApi()
             .AllowAnonymous();
     }
