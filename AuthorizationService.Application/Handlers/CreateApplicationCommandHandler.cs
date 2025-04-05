@@ -1,5 +1,5 @@
-using AuthorizationService.Application.Extensions;
 using AuthorizationService.Application.Query;
+using AuthorizationService.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Abstractions;

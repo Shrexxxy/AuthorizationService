@@ -146,6 +146,19 @@
             "related": ".xml"
           }
         }
+      },
+      "AuthorizationService.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "OpenIddict.Abstractions": "6.2.0"
+        },
+        "compile": {
+          "bin/placeholder/AuthorizationService.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthorizationService.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -409,10 +422,16 @@
         "openiddict.abstractions.6.2.0.nupkg.sha512",
         "openiddict.abstractions.nuspec"
       ]
+    },
+    "AuthorizationService.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../AuthorizationService.Infrastructure/AuthorizationService.Infrastructure.csproj",
+      "msbuildProject": "../AuthorizationService.Infrastructure/AuthorizationService.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AuthorizationService.Infrastructure >= 1.0.0",
       "MediatR >= 12.5.0",
       "OpenIddict.Abstractions >= 6.2.0"
     ]
@@ -467,7 +486,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.Infrastructure\\AuthorizationService.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.Infrastructure\\AuthorizationService.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

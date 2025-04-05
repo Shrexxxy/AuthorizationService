@@ -7,12 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="12.5.0" />
       <PackageReference Include="OpenIddict.Abstractions" Version="6.2.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\AuthorizationService.Infrastructure\AuthorizationService.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

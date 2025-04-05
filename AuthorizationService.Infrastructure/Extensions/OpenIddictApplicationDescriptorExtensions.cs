@@ -1,6 +1,6 @@
 using OpenIddict.Abstractions;
 
-namespace AuthorizationService.Application.Extensions;
+namespace AuthorizationService.Infrastructure.Extensions;
 
 public static class OpenIddictApplicationDescriptorExtensions
 {
