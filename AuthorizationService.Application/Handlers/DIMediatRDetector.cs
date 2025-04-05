@@ -1,3 +1,3 @@
 namespace AuthorizationService.Application.Handlers;
 
-public record DIDetector;
+public abstract record DiMediatrDetector;

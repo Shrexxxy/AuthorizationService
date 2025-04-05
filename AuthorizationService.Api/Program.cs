@@ -88,7 +88,7 @@ builder.Services.AddOpenIddict()
 // Добавляе медиатр
 builder.Services.AddMediatR(options =>
 {
-    options.RegisterServicesFromAssemblyContaining<DIDetector>();
+    options.RegisterServicesFromAssemblyContaining<DiMediatrDetector>();
 });
 
 
