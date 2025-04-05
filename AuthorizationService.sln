@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationService", "AuthorizationService\AuthorizationService.csproj", "{C392E625-8FCA-497C-9800-FAE660184EFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationService.Api", "AuthorizationService.Api\AuthorizationService.Api.csproj", "{C392E625-8FCA-497C-9800-FAE660184EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationService.DAL", "AuthorizationService.DAL\AuthorizationService.DAL.csproj", "{B84A8391-8BBD-478C-9832-CC5E02B512FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationService.Domain", "AuthorizationService.Domain\AuthorizationService.Domain.csproj", "{B84A8391-8BBD-478C-9832-CC5E02B512FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationService.Application", "AuthorizationService.Application\AuthorizationService.Application.csproj", "{707148D1-9461-45CC-87A8-E1FD53D6F749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{B84A8391-8BBD-478C-9832-CC5E02B512FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B84A8391-8BBD-478C-9832-CC5E02B512FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B84A8391-8BBD-478C-9832-CC5E02B512FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707148D1-9461-45CC-87A8-E1FD53D6F749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707148D1-9461-45CC-87A8-E1FD53D6F749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707148D1-9461-45CC-87A8-E1FD53D6F749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707148D1-9461-45CC-87A8-E1FD53D6F749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
