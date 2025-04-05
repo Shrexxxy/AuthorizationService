@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "RsHOgp5HZcI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService.Application\\AuthorizationService.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Shrexy\\.nuget\\packages\\mediatr\\12.5.0\\mediatr.12.5.0.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.2\\microsoft.extensions.dependencyinjection.abstractions.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0\\microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.2\\microsoft.extensions.primitives.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.4.0\\microsoft.identitymodel.abstractions.8.4.0.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\microsoft.identitymodel.logging\\8.4.0\\microsoft.identitymodel.logging.8.4.0.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.4.0\\microsoft.identitymodel.tokens.8.4.0.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\openiddict.abstractions\\6.2.0\\openiddict.abstractions.6.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
