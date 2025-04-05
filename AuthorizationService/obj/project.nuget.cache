@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iPyTp8hZd14=",
+  "dgSpecHash": "TJ9bbeE6lT0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Shrexy\\RiderProjects\\PET\\AuthorizationService\\AuthorizationService\\AuthorizationService.csproj",
   "expectedPackageFiles": [
@@ -90,6 +90,7 @@
     "C:\\Users\\Shrexy\\.nuget\\packages\\polly.extensions\\8.4.2\\polly.extensions.8.4.2.nupkg.sha512",
     "C:\\Users\\Shrexy\\.nuget\\packages\\polly.extensions.http\\3.0.0\\polly.extensions.http.3.0.0.nupkg.sha512",
     "C:\\Users\\Shrexy\\.nuget\\packages\\polly.ratelimiting\\8.4.2\\polly.ratelimiting.8.4.2.nupkg.sha512",
+    "C:\\Users\\Shrexy\\.nuget\\packages\\scalar.aspnetcore\\2.1.6\\scalar.aspnetcore.2.1.6.nupkg.sha512",
     "C:\\Users\\Shrexy\\.nuget\\packages\\serilog\\4.2.0\\serilog.4.2.0.nupkg.sha512",
     "C:\\Users\\Shrexy\\.nuget\\packages\\serilog.aspnetcore\\9.0.0\\serilog.aspnetcore.9.0.0.nupkg.sha512",
     "C:\\Users\\Shrexy\\.nuget\\packages\\serilog.extensions.hosting\\9.0.0\\serilog.extensions.hosting.9.0.0.nupkg.sha512",

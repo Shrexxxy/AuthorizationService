@@ -410,3 +410,4 @@ C:\Users\Shrexy\RiderProjects\PET\AuthorizationService\AuthorizationService\bin\
 C:\Users\Shrexy\RiderProjects\PET\AuthorizationService\AuthorizationService\obj\Debug\net9.0\Authoriz.ECDF2498.Up2Date
 C:\Users\Shrexy\RiderProjects\PET\AuthorizationService\AuthorizationService\obj\Debug\net9.0\AuthorizationService.genruntimeconfig.cache
 C:\Users\Shrexy\RiderProjects\PET\AuthorizationService\AuthorizationService\obj\Debug\net9.0\ref\AuthorizationService.dll
+C:\Users\Shrexy\RiderProjects\PET\AuthorizationService\AuthorizationService\bin\Debug\net9.0\Scalar.AspNetCore.dll

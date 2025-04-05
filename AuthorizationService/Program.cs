@@ -3,11 +3,13 @@ using AuthorizationService.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
+using Scalar.AspNetCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 // Настройка сервисов
 builder.Services.AddAuthorization();
+builder.Services.AddOpenApi();
 
 // 🔹 Настраиваем Serilog + Seq
 builder.Host.UseSerilog((context, config) =>
@@ -87,6 +89,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 // 🔹 Регистрация middleware - порядок важен!

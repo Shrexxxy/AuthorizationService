@@ -1754,6 +1754,22 @@
           }
         }
       },
+      "Scalar.AspNetCore/2.1.6": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Serilog/4.2.0": {
         "type": "package",
         "compile": {
@@ -5107,6 +5123,23 @@
         "polly.ratelimiting.nuspec"
       ]
     },
+    "Scalar.AspNetCore/2.1.6": {
+      "sha512": "kdF0cjD7GtjICVI1F7jlZurNMWnz05/DU4mIVioKiItFAiBwk68HUD4PZAF6dwO47Z8t8pRaKo3kC70RVV64oA==",
+      "type": "package",
+      "path": "scalar.aspnetcore/2.1.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Scalar.AspNetCore.dll",
+        "lib/net8.0/Scalar.AspNetCore.xml",
+        "lib/net9.0/Scalar.AspNetCore.dll",
+        "lib/net9.0/Scalar.AspNetCore.xml",
+        "scalar.aspnetcore.2.1.6.nupkg.sha512",
+        "scalar.aspnetcore.nuspec"
+      ]
+    },
     "Serilog/4.2.0": {
       "sha512": "gmoWVOvKgbME8TYR+gwMf7osROiWAURterc6Rt2dQyX7wtjZYpqFiA/pY6ztjGQKKV62GGCyOcmtP1UKMHgSmA==",
       "type": "package",
@@ -5765,6 +5798,7 @@
       "OpenIddict >= 6.2.0",
       "OpenIddict.AspNetCore >= 6.2.0",
       "OpenIddict.Server.AspNetCore >= 6.2.0",
+      "Scalar.AspNetCore >= 2.1.6",
       "Serilog >= 4.2.0",
       "Serilog.AspNetCore >= 9.0.0",
       "Serilog.Sinks.Seq >= 9.0.0"
@@ -5872,6 +5906,10 @@
           "OpenIddict.Server.AspNetCore": {
             "target": "Package",
             "version": "[6.2.0, )"
+          },
+          "Scalar.AspNetCore": {
+            "target": "Package",
+            "version": "[2.1.6, )"
           },
           "Serilog": {
             "target": "Package",
