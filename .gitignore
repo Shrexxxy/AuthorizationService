@@ -1,1 +1,2 @@
-**/*.StaticWebAssets.build.json
+**/obj/
+**/bin/
