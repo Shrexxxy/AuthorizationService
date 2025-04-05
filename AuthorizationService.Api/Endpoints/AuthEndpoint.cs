@@ -16,13 +16,18 @@ public static class AuthEndpoint
 
         api.MapPost("/register", RegisterAsync)
             .WithOpenApi()
+            .WithDescription("Регистрация пользователя.")
             .AllowAnonymous();
-        
+    
         api.MapPost("/login", LoginAsync)
             .WithOpenApi()
+            .WithDescription("Авторизация пользователя.")
             .AllowAnonymous();
-        
-        api.MapPost("/refresh", RefreshTokenAsync);
+    
+        api.MapPost("/refresh", RefreshTokenAsync)
+            .WithOpenApi()
+            .WithDescription("Обновление токена.")
+            .AllowAnonymous();
     }
 
     private static async Task<IResult> RegisterAsync(
