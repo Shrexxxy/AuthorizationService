@@ -1,6 +1,5 @@
 using AuthorizationService.Application.Query;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizationService.Api.Endpoints;
@@ -13,6 +12,7 @@ public static class ApplicationsEndpoint
 
         api.MapPost("/create", CreateApplicationAsync)
             .WithOpenApi()
+            .WithDescription("Создает новое приложение на основе переданных данных.")
             .AllowAnonymous();
     }
 
