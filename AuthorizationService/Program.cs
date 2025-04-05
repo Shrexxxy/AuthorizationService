@@ -89,7 +89,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.MapScalarApiReference(options =>
+    {
+        options
+            .WithTitle("Identity API")
+            .WithTheme(ScalarTheme.DeepSpace)
+            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+            .WithDarkMode(true);
+    });
 }
 
 // 🔹 Регистрация middleware - порядок важен!
