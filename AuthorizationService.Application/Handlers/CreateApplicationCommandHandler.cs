@@ -1,3 +1,4 @@
+using AuthorizationService.Application.Extensions;
 using AuthorizationService.Application.Query;
 using MediatR;
 using Microsoft.Extensions.Logging;
