@@ -8,6 +8,7 @@ public class RegisterModelToIdentityUserConverter : ITypeConverter<RegisterModel
 {
     public IdentityUser<Guid> Convert(RegisterModel source, IdentityUser<Guid> destination, ResolutionContext context)
     {
+        destination ??= new();
         destination.UserName = source.UserName;
         destination.Email = source.Email;
         destination.PhoneNumber = source.PhoneNumber;

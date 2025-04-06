@@ -67,7 +67,6 @@ public class IdentityRegisterAccountCommandHandler : IRequestHandler<IdentityReg
             // Логирование ошибки при невалидных данных
             _logger.LogWarning("Ошибка валидации данных регистрации: {Ошибки}", string.Join(",", validationResult.Errors));
             throw new ValidationException(validationResult.Errors.ToString());
-
         }
 
         // Создаем аккаунт пользователя
