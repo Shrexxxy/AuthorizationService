@@ -1,11 +1,13 @@
 using AutoMapper;
-using IdentityService.Application.Query;
+using IdentityService.Application.Query.Application;
 using IdentityService.Application.ViewModels;
 using IdentityService.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Abstractions;
 using OpenIddict.EntityFrameworkCore.Models;
+
+namespace IdentityService.Application.Handlers.Application;
 
 /// <summary>
 /// Обработчик запроса для получения информации о приложении по его ClientId.

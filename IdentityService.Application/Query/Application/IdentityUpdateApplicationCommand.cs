@@ -1,7 +1,7 @@
 using IdentityService.Application.Model;
 using MediatR;
 
-namespace IdentityService.Application.Query;
+namespace IdentityService.Application.Query.Application;
 
 /// <summary>
 /// Команда для обновления данных приложения на основе заданного идентификатора клиента и модели обновления.

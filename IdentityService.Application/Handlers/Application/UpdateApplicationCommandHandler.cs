@@ -1,13 +1,12 @@
-using System.Net;
 using System.Text.Json;
+using IdentityService.Application.Query.Application;
 using IdentityService.Infrastructure.Exceptions;
-using IdentityService.Application.Query;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Abstractions;
 using OpenIddict.EntityFrameworkCore.Models;
 
-namespace IdentityService.Application.Handlers;
+namespace IdentityService.Application.Handlers.Application;
 
 public class UpdateApplicationCommandHandler : IRequestHandler<UpdateApplicationCommand>
 {

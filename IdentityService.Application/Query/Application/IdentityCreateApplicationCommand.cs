@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace IdentityService.Application.Query;
+namespace IdentityService.Application.Query.Application;
 
 /// <summary>
 /// Команда для создания нового приложения с указанными параметрами,

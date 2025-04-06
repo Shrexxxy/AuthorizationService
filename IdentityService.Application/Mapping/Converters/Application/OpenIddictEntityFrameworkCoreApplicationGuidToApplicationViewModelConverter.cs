@@ -4,7 +4,7 @@ using IdentityService.Application.ViewModels;
 using OpenIddict.Abstractions;
 using OpenIddict.EntityFrameworkCore.Models;
 
-namespace IdentityService.Application.Mapping.Converters;
+namespace IdentityService.Application.Mapping.Converters.Application;
 
 public class OpenIddictEntityFrameworkCoreApplicationGuidToApplicationViewModelConverter : ITypeConverter<OpenIddictEntityFrameworkCoreApplication<Guid>, ApplicationViewModel>
 {

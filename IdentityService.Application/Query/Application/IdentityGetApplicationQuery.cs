@@ -1,7 +1,7 @@
 using IdentityService.Application.ViewModels;
 using MediatR;
 
-namespace IdentityService.Application.Query;
+namespace IdentityService.Application.Query.Application;
 
 /// <summary>
 /// Запрос для получения информации о приложении на основе его идентификатора клиента (ClientId).

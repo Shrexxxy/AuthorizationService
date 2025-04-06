@@ -1,11 +1,10 @@
-using System.Net;
+using IdentityService.Application.Query.Application;
 using IdentityService.Infrastructure.Exceptions;
-using IdentityService.Application.Query;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Abstractions;
 
-namespace IdentityService.Application.Handlers;
+namespace IdentityService.Application.Handlers.Application;
 
 public class DeleteApplicationCommandHandler : IRequestHandler<DeleteApplicationCommand>
 {

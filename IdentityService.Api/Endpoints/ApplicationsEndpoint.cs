@@ -1,5 +1,6 @@
 using IdentityService.Application.Model;
 using IdentityService.Application.Query;
+using IdentityService.Application.Query.Application;
 using IdentityService.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

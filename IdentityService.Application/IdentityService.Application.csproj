@@ -8,12 +8,14 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="14.0.0" />
+      <PackageReference Include="FluentValidation" Version="11.11.0" />
       <PackageReference Include="MediatR" Version="12.5.0" />
       <PackageReference Include="OpenIddict.Abstractions" Version="6.2.0" />
       <PackageReference Include="OpenIddict.EntityFrameworkCore.Models" Version="6.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\IdentityService.Domain\IdentityService.Domain.csproj" />
       <ProjectReference Include="..\IdentityService.Infrastructure\IdentityService.Infrastructure.csproj" />
     </ItemGroup>
 

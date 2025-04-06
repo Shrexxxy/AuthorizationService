@@ -1,10 +1,10 @@
+using IdentityService.Application.Query.Application;
 using IdentityService.Infrastructure.Extensions;
-using IdentityService.Application.Query;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Abstractions;
 
-namespace IdentityService.Application.Handlers;
+namespace IdentityService.Application.Handlers.Application;
 
 /// <summary>
 /// Обработчик команды <see cref="IdentityCreateApplicationCommand"/> для создания нового приложения.

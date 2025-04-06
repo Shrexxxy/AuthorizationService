@@ -1,6 +1,9 @@
 using System.Security.Claims;
 using IdentityService.Application.Model;
+using IdentityService.Application.Query.Account;
+using MediatR;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Abstractions;
@@ -30,13 +33,28 @@ public static class AuthEndpoint
             .AllowAnonymous();
     }
 
+    //TODO: временно
+    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     private static async Task<IResult> RegisterAsync(
         [FromBody] RegisterModel model, 
-        [FromServices] UserManager<IdentityUser> userManager)
+        [FromServices] IMediator mediator,
+        HttpContext httpContext)
     {
-        var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-        var result = await userManager.CreateAsync(user, model.Password);
-        return result.Succeeded ? Results.Ok("User registered") : Results.BadRequest(result.Errors);
+        // Handler
+        try
+        {
+            await mediator.Send(new IdentityRegisterAccountCommand(model), httpContext.RequestAborted);
+            return Results.Ok("User registered");
+        }
+        catch (Exception e)
+        {
+            return Results.InternalServerError();
+        }
+
+        //
+        // var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+        // var result = await userManager.CreateAsync(user, model.Password);
+        // return result.Succeeded ? Results.Ok("User registered") : Results.BadRequest(result.Errors);
     }
 
     private static async Task<IResult> LoginAsync(
