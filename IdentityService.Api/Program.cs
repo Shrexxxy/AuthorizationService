@@ -34,12 +34,14 @@ builder.Services.ConfigureIdentity();
 // 🔹 Настраиваем OpenIddict
 builder.Services.ConfigureOpenIddict();
 
-// Добавляе медиатр
+// 🔹 Добавляем медиатр
 builder.Services.AddMediatR(options =>
 {
     options.RegisterServicesFromAssemblyContaining<DiMediatrDetector>();
 });
 
+// 🔹 Добавляем валидатор
+builder.Services.ConfigureFluentValidator();
 
 // Build Application
 var app = builder.Build();

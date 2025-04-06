@@ -27,6 +27,9 @@ public static partial class ServiceCollectionExtensions
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
+        // Регистрируем UserClaimsPrincipalFactory
+        services.AddScoped<UserClaimsPrincipalFactory<IdentityUser<Guid>, IdentityRole<Guid>>>();
+
         return services;
     }
 }

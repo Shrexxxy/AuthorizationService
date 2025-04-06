@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IdentityService.Application.Mapping.Converters.Account;
 
-public class RegisterModelToIdentityUserConverter : ITypeConverter<RegisterModel, IdentityUser>
+public class RegisterModelToIdentityUserConverter : ITypeConverter<RegisterModel, IdentityUser<Guid>>
 {
-    public IdentityUser Convert(RegisterModel source, IdentityUser destination, ResolutionContext context)
+    public IdentityUser<Guid> Convert(RegisterModel source, IdentityUser<Guid> destination, ResolutionContext context)
     {
-        destination ??= new IdentityUser();
-        
         destination.UserName = source.UserName;
         destination.Email = source.Email;
         destination.PhoneNumber = source.PhoneNumber;

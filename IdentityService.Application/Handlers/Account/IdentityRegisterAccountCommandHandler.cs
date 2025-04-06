@@ -23,8 +23,8 @@ public class IdentityRegisterAccountCommandHandler : IRequestHandler<IdentityReg
     private readonly ILogger<IdentityRegisterAccountCommandHandler> _logger;
     private readonly IMapper _mapper;
     private readonly IValidator<RegisterModel> _registerModelValidator;
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly UserClaimsPrincipalFactory<IdentityUser, IdentityRole> _userClaims;
+    private readonly UserManager<IdentityUser<Guid>> _userManager;
+    private readonly UserClaimsPrincipalFactory<IdentityUser<Guid>, IdentityRole<Guid>> _userClaims;
 
     /// <summary>
     /// Конструктор обработчика IdentityRegisterAccountCommandHandler
@@ -39,15 +39,15 @@ public class IdentityRegisterAccountCommandHandler : IRequestHandler<IdentityReg
         IMapper mapper,
         IValidator<RegisterModel> registerModelValidator,
         ILogger<IdentityRegisterAccountCommandHandler> logger,
-        UserManager<IdentityUser> userManager,
-        AppDbContext dbContext,
-        UserClaimsPrincipalFactory<IdentityUser, IdentityRole> userClaims)
+        AppDbContext dbContext, 
+        UserManager<IdentityUser<Guid>> userManager, 
+        UserClaimsPrincipalFactory<IdentityUser<Guid>, IdentityRole<Guid>> userClaims)
     {
         _mapper = mapper;
         _registerModelValidator = registerModelValidator;
         _logger = logger;
-        _userManager = userManager;
         _dbContext = dbContext;
+        _userManager = userManager;
         _userClaims = userClaims;
     }
 
@@ -86,7 +86,7 @@ public class IdentityRegisterAccountCommandHandler : IRequestHandler<IdentityReg
         _logger.LogInformation("Начало создания нового аккаунта пользователя...");
 
         // Маппинг модели регистрации в объект IdentityUser
-        var user = _mapper.Map<IdentityUser>(model);
+        var user = _mapper.Map<IdentityUser<Guid>>(model);
 
         // Начинаем транзакцию для обеспечения атомарности операции
         await _dbContext.Database.BeginTransactionAsync(cancellationToken);

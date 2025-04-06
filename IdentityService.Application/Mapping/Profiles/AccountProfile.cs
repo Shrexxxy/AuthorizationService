@@ -11,7 +11,7 @@ public class AccountProfile : Profile
 {
     public AccountProfile()
     {
-        CreateMap<RegisterModel, IdentityUser>()
+        CreateMap<RegisterModel, IdentityUser<Guid>>()
             .ConvertUsing<RegisterModelToIdentityUserConverter>();
     }
 }
