@@ -6,7 +6,7 @@ namespace IdentityService.Application.Query;
 /// Команда для создания нового приложения с указанными параметрами,
 /// такими как идентификатор клиента, секретный ключ, отображаемое имя и другие параметры конфигурации.
 /// </summary>
-public class CreateApplicationCommand : IRequest
+public class IdentityCreateApplicationCommand : IRequest
 {
     /// <summary>
     /// Уникальный идентификатор клиента.

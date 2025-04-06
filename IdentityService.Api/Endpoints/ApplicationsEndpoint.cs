@@ -13,22 +13,41 @@ public static class ApplicationsEndpoint
         var api = app.MapGroup("/api/applications")
             .WithOpenApi();
 
-        api.MapPost("/create", CreateApplicationAsync)
+        
+        api.MapGet("/", GetApplication)
+            .WithDescription("Получает данные приложения по client Id.")
+            //TODO: временно
+            .AllowAnonymous();
+        
+        api.MapPost("/", CreateApplication)
             .WithDescription("Создает новое приложение на основе переданных данных.")
             //TODO: временно
             .AllowAnonymous();
         
-        app.MapPut("/", UpdateApplication)
+        api.MapPut("/", UpdateApplication)
             .WithDescription("Обновляет приложение по client Id")
             //TODO: временно
             .AllowAnonymous();
         
-        app.MapDelete("/", DeleteApplication)
+        api.MapDelete("/", DeleteApplication)
             .WithDescription("Обновляет приложение по client Id")
             //TODO: временно
             .AllowAnonymous();
     }
     
+    //TODO: временно
+    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    private static async Task<IResult> GetApplication(
+        [FromQuery] string clientId,
+        [FromHeader] bool? Bff,
+        [FromServices] IMediator mediator,
+        HttpContext httpContext
+    )
+    {
+        var result = await mediator.Send(new IdentityGetApplicationQuery(clientId), httpContext.RequestAborted);
+        return Results.Ok(result);
+    }
+
     //TODO: временно
     //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     private static async Task<IResult> DeleteApplication(
@@ -66,8 +85,8 @@ public static class ApplicationsEndpoint
 
     //TODO: временно
     //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
-    private static async Task<IResult> CreateApplicationAsync(
-        [FromBody] CreateApplicationCommand command, 
+    private static async Task<IResult> CreateApplication(
+        [FromBody] IdentityCreateApplicationCommand command, 
         [FromServices] IMediator mediator)
     {
         try

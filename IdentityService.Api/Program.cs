@@ -22,6 +22,9 @@ builder.Host.UseSerilog((context, config) =>
           .WriteTo.Seq("http://localhost:8001");
 });
 
+//🔹 Настройка автомаппера
+builder.Services.ConfigureAutoMapper();
+
 // 🔹 Настройка базы данных
 builder.Services.ConfigureDb(builder.Configuration);
 

@@ -7,10 +7,10 @@ using OpenIddict.Abstractions;
 namespace IdentityService.Application.Handlers;
 
 /// <summary>
-/// Обработчик команды <see cref="CreateApplicationCommand"/> для создания нового приложения.
+/// Обработчик команды <see cref="IdentityCreateApplicationCommand"/> для создания нового приложения.
 /// Использует OpenIddict для управления приложениями.
 /// </summary>
-public class CreateApplicationCommandHandler : IRequestHandler<CreateApplicationCommand>
+public class CreateApplicationCommandHandler : IRequestHandler<IdentityCreateApplicationCommand>
 {
     private readonly ILogger<CreateApplicationCommandHandler> _logger;
     private readonly IOpenIddictApplicationManager _applicationManager;
@@ -29,12 +29,12 @@ public class CreateApplicationCommandHandler : IRequestHandler<CreateApplication
     }
 
     /// <summary>
-    /// Обрабатывает команду <see cref="CreateApplicationCommand"/> и создает новое приложение.
+    /// Обрабатывает команду <see cref="IdentityCreateApplicationCommand"/> и создает новое приложение.
     /// </summary>
     /// <param name="request">Запрос, содержащий информацию о приложении для создания.</param>
     /// <param name="cancellationToken">Токен для отмены операции.</param>
     /// <returns>Асинхронная задача.</returns>
-    public async Task Handle(CreateApplicationCommand request, CancellationToken cancellationToken)
+    public async Task Handle(IdentityCreateApplicationCommand request, CancellationToken cancellationToken)
     {
         // Проверяем, существует ли уже приложение с заданным ClientId.
         var existingApp = await _applicationManager.FindByClientIdAsync(request.ClientId, cancellationToken);
