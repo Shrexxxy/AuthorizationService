@@ -1,4 +1,6 @@
+using AuthorizationService.Application.Model;
 using AuthorizationService.Application.Query;
+using AuthorizationService.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,14 +10,46 @@ public static class ApplicationsEndpoint
 {
     public static void MapApplicationsEndpoints(this IEndpointRouteBuilder app)
     {
-        var api = app.MapGroup("/api/applications");
+        var api = app.MapGroup("/api/applications")
+            .WithOpenApi();
 
         api.MapPost("/create", CreateApplicationAsync)
-            .WithOpenApi()
             .WithDescription("Создает новое приложение на основе переданных данных.")
+            //TODO: временно
+            .AllowAnonymous();
+        
+        app.MapPut("/", UpdateApplication)
+            .WithDescription("Обновляет приложение по client Id")
+            //TODO: временно
             .AllowAnonymous();
     }
+    
+    //TODO: временно
+    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    private static async Task<IResult> UpdateApplication(
+        [FromQuery] string clientId,
+        [FromBody] ApplicationUpdateModel model,
+        [FromServices] IMediator mediator,
+        HttpContext httpContext)
+    {
+        try
+        { 
+            await mediator.Send(new UpdateApplicationCommand(clientId, model), httpContext.RequestAborted);
+            return Results.Ok();
+        }
+        catch (ApplicationNotFoundException e)
+        {
+            return Results.NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return Results.InternalServerError(e.Message);
+        }
 
+    }
+
+    //TODO: временно
+    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     private static async Task<IResult> CreateApplicationAsync(
         [FromBody] CreateApplicationCommand command, 
         [FromServices] IMediator mediator)

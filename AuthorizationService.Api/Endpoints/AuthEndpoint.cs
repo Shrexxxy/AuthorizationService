@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using AuthorizationService.Model;
+using AuthorizationService.Application.Model;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

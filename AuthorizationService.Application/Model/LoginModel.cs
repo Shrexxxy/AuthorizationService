@@ -1,4 +1,4 @@
-namespace AuthorizationService.Model;
+namespace AuthorizationService.Application.Model;
 
 public class LoginModel
 {
