@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{ED00E393-BA26-45C8-B88B-37B8CAE06636}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
+		.idea\.idea.IdentityService\.idea\.gitignore = .idea\.idea.IdentityService\.idea\.gitignore
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Infrastructure", "IdentityService.Infrastructure\IdentityService.Infrastructure.csproj", "{491BD75A-BDF3-4AAE-A640-0F49A1CA3B69}"
