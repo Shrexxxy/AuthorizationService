@@ -22,6 +22,22 @@ public static class ApplicationsEndpoint
             .WithDescription("Обновляет приложение по client Id")
             //TODO: временно
             .AllowAnonymous();
+        
+        app.MapDelete("/", DeleteApplication)
+            .WithDescription("Обновляет приложение по client Id")
+            //TODO: временно
+            .AllowAnonymous();
+    }
+    
+    //TODO: временно
+    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    private static async Task<IResult> DeleteApplication(
+        [FromQuery] string clientId,
+        HttpContext httpContext,
+        [FromServices] IMediator mediator)
+    { 
+        await mediator.Send(new DeleteApplicationCommand(clientId), httpContext.RequestAborted);
+        return Results.Ok();
     }
     
     //TODO: временно
