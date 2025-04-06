@@ -43,11 +43,16 @@ builder.Services.AddMediatR(options =>
 // 🔹 Добавляем валидатор
 builder.Services.ConfigureFluentValidator();
 
+// 🔹 Добавляем HostedService
+builder.Services.ConfigureHostedService();
+
 // Build Application
 var app = builder.Build();
 
 // Open Api
 app.ConfigureScalar();
+
+
 
 // 🔹 Регистрация middleware
 app.UseRouting();
