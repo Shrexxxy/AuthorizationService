@@ -11,8 +11,13 @@ using OpenIddict.Server.AspNetCore;
 
 namespace IdentityService.Application.Handlers.Account;
 
+/// <summary>
+/// Обработчик команды авторизации пользователя в Identity.
+/// </summary>
 public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUserCommand, IResult>
 {
+    private const string SECRET_VALUE = "secret_value";
+    
     private readonly UserManager<IdentityUser<Guid>> _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IOpenIddictApplicationManager _openIddictApplicationManager;
@@ -27,6 +32,9 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
     private List<object>? _authorizations;
     private string _openIddictApplicationId;
 
+    /// <summary>
+    /// Конструктор обработчика команды авторизации пользователя.
+    /// </summary>
     public IdentityLoginUserCommandHandler(
         UserManager<IdentityUser<Guid>> userManager,
         IHttpContextAccessor httpContextAccessor,
@@ -43,13 +51,17 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
         _openIddictScopeManager = openIddictScopeManager;
     }
 
+    /// <summary>
+    /// Хендлер авторизации
+    /// </summary>
     public async Task<IResult> Handle(IdentityLoginUserCommand request, CancellationToken cancellationToken)
     {
-        //
+        // Проверка авторизации на основе cookie.
         var result = await AuthorizeCookieAsync();
 
         if (!result.Succeeded)
         {
+            // Если авторизация не удалась, выполняется перенаправление к страничке входа.
             ArgumentNullException.ThrowIfNull(_httpContext);
             return Results.Challenge(new AuthenticationProperties
                 {
@@ -61,15 +73,22 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
                 new List<string> { CookieAuthenticationDefaults.AuthenticationScheme });
         }
 
+        // Получение пользователя на основе Principal.
         _user = await _userManager.GetUserAsync(result.Principal)
                 ?? throw new InvalidOperationException("The user details cannot be retrieved.");
 
+        // Настройка OpenIddict.
         await ConfigureOpenIddictAsync();
 
+        // Выполнение процесса авторизации.
         return await Authorize();
 
     }
 
+    /// <summary>
+    /// Авторизация на основе cookie.
+    /// </summary>
+    /// <returns>Результат авторизации.</returns>
     private async Task<AuthenticateResult> AuthorizeCookieAsync()
     {
         if (_httpContextAccessor.HttpContext is null)
@@ -79,23 +98,31 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
         }
 
         _httpContext = _httpContextAccessor.HttpContext;
+        
+        // Получение OpenIddict-запроса.
         _openIddictRequest = _httpContextAccessor.HttpContext.GetOpenIddictServerRequest()
                              ?? throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
+        // Выполнение аутентификации через cookie.
         return await _httpContextAccessor.HttpContext.AuthenticateAsync(CookieAuthenticationDefaults
             .AuthenticationScheme);
     }
 
+    /// <summary>
+    /// Настройка клиента OpenIddict, проверка приложения и получение авторизаций.
+    /// </summary>
     private async Task ConfigureOpenIddictAsync()
     {
         ArgumentNullException.ThrowIfNull(_openIddictRequest);
         
+        // Поиск приложения клиента на основе идентификатора в запросе.
         _openIddictApplication = await _openIddictApplicationManager.FindByClientIdAsync(_openIddictRequest.ClientId!, _httpContext.RequestAborted)
                                  ?? throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
         
         _openIddictApplicationId = await _openIddictApplicationManager.GetIdAsync(_openIddictApplication, _httpContext.RequestAborted)!
                                    ?? throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
 
+        // Проверка существующих авторизаций.
         _authorizations = (List<object>?)await _openIddictAuthorizationManager.FindAsync(
                                   subject: _user.Id.ToString(),
                                   client: _openIddictApplicationId,
@@ -107,6 +134,9 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
                           ?? throw new InvalidOperationException("No authorization found");
     }
 
+    /// <summary>
+    /// Выполняет процесс авторизации в зависимости от типа согласия (consent).
+    /// </summary>
     public async Task<IResult> Authorize()
     {
         ArgumentNullException.ThrowIfNull(_user);
@@ -115,8 +145,7 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
 
         switch (await _openIddictApplicationManager.GetConsentTypeAsync(_openIddictApplication, _httpContext.RequestAborted))
         {
-            // If the consent is external (e.g when authorizations are granted by a sysadmin),
-            // immediately return an error if no authorization can be found in the database.
+            // Для внешнего согласия возвращается ошибка, если нет авторизаций.
             case OpenIddictConstants.ConsentTypes.External when _authorizations != null && !_authorizations.Any():
                 return Results.Forbid(
                     authenticationSchemes: new[] { OpenIddictServerAspNetCoreDefaults.AuthenticationScheme },
@@ -127,16 +156,14 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
                             "The logged in user is not allowed to access this client application."
                     }!));
 
-            // If the consent is implicit or if an authorization was found,
-            // return an authorization response without displaying the consent form.
+            // Упрощенная авторизация в случае имплицитного согласия.
             case OpenIddictConstants.ConsentTypes.Implicit:
             case OpenIddictConstants.ConsentTypes.External when _authorizations != null && _authorizations!.Any():
             case OpenIddictConstants.ConsentTypes.Explicit when _authorizations != null && _authorizations.Any() &&
                                                                 !_openIddictRequest.HasPromptValue(OpenIddictConstants.PromptValues.Consent):
                 return await IsExplictHasConsent();
 
-            // At this point, no authorization was found in the database and an error must be returned
-            // if the client application specified prompt=none in the authorization request.
+            // Возврат ошибки, если требуется согласие пользователя для авторизации.
             case OpenIddictConstants.ConsentTypes.Explicit
                 when _openIddictRequest.HasPromptValue(OpenIddictConstants.PromptValues.None):
             case OpenIddictConstants.ConsentTypes.Systematic
@@ -150,7 +177,7 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
                             "Interactive user consent is required."
                     }!));
 
-            // In every other case, render the consent form.
+            // Во всех остальных случаях пользователь будет перенаправлен на форму согласия.
             default:
                 return Results.Challenge(
                     authenticationSchemes: new[] { OpenIddictServerAspNetCoreDefaults.AuthenticationScheme },
@@ -158,19 +185,18 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
         }
     }
     
+    /// <summary>
+    /// Проверка наличия явного согласия пользователя.
+    /// </summary>
     private async Task<IResult> IsExplictHasConsent()
     {
         var principal = await _signInManager.CreateUserPrincipalAsync(_user);
-
-        // Note: in this sample, the granted scopes match the requested scope
-        // but you may want to allow the user to uncheck specific scopes.
-        // For that, simply restrict the list of scopes before calling SetScopes.
-
+        
+        // Установка областей (scopes) для Principal.
         principal.SetScopes(_openIddictRequest.GetScopes());
         principal.SetResources(await _openIddictScopeManager.ListResourcesAsync(principal.GetScopes(), _httpContext.RequestAborted).ToListAsync(_httpContext.RequestAborted));
 
-        // Automatically create a permanent authorization to avoid requiring explicit consent
-        // for future authorization or token requests containing the same scopes.
+        // Создание постоянной авторизации.
         var authorization = _authorizations.LastOrDefault() 
                             ?? await _openIddictAuthorizationManager.CreateAsync(
                             principal: principal,
@@ -179,31 +205,23 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
                             type: OpenIddictConstants.AuthorizationTypes.Permanent,
                             scopes: principal.GetScopes(), 
                             cancellationToken: _httpContext.RequestAborted);
-
-        //var identifier = await _openIddictApplicationManager.GetIdAsync(authorization);
+        
         var identifier = await _openIddictAuthorizationManager.GetIdAsync(authorization, _httpContext.RequestAborted);
         principal.SetAuthorizationId(identifier);
 
+        // Установка claim-ов для токенов.
         principal.SetDestinations(static claim => claim.Type switch
         {
-            // If the "profile" scope was granted, allow the "name" claim to be
-            // added to the access and identity tokens derived from the principal.
             OpenIddictConstants.Claims.Name when claim.Subject.HasScope(OpenIddictConstants.Scopes.Profile) => new[]
             {
                 OpenIddictConstants.Destinations.AccessToken, OpenIddictConstants.Destinations.IdentityToken
             },
-
-            // Never add the "secret_value" claim to access or identity tokens.
-            // In this case, it will only be added to authorization codes,
-            // refresh tokens and user/device codes, that are always encrypted.
-            "secret_value" => Array.Empty<string>(),
-
-            // Otherwise, add the claim to the access tokens only.
+            SECRET_VALUE => Array.Empty<string>(),
             _ => new[] { OpenIddictConstants.Destinations.AccessToken }
         });
 
 
-
+        // Возврат результата авторизации.
         return Results.SignIn(principal, null, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
 }
