@@ -54,7 +54,7 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
     /// <summary>
     /// Хендлер авторизации
     /// </summary>
-    public async Task<IResult> Handle(IdentityLoginUserCommand request, CancellationToken cancellationToken)
+    public async Task<IResult> Handle(IdentityLoginUserCommand request, CancellationToken cancellationToken = default)
     {
         // Проверка авторизации на основе cookie.
         var result = await AuthorizeCookieAsync();
@@ -63,12 +63,13 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
         {
             // Если авторизация не удалась, выполняется перенаправление к страничке входа.
             ArgumentNullException.ThrowIfNull(_httpContext);
+            var redirectUri = _httpContext.Request.PathBase + _httpContext.Request.Path + QueryString.Create(
+                _httpContext.Request.HasFormContentType
+                    ? _httpContext.Request.Form.ToList()
+                    : _httpContext.Request.Query.ToList());
             return Results.Challenge(new AuthenticationProperties
                 {
-                    RedirectUri = _httpContext.Request.PathBase + _httpContext.Request.Path + QueryString.Create(
-                        _httpContext.Request.HasFormContentType
-                            ? _httpContext.Request.Form.ToList()
-                            : _httpContext.Request.Query.ToList())
+                    RedirectUri = redirectUri
                 },
                 new List<string> { CookieAuthenticationDefaults.AuthenticationScheme });
         }
@@ -104,7 +105,7 @@ public class IdentityLoginUserCommandHandler : IRequestHandler<IdentityLoginUser
                              ?? throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
         // Выполнение аутентификации через cookie.
-        return await _httpContextAccessor.HttpContext.AuthenticateAsync(CookieAuthenticationDefaults
+        return await _httpContext.AuthenticateAsync(CookieAuthenticationDefaults
             .AuthenticationScheme);
     }
 

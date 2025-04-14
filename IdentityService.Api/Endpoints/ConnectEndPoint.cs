@@ -11,7 +11,7 @@ public static class ConnectEndPoint
 {
     public static void MapConnectEndpoints(this IEndpointRouteBuilder app)
     {
-        var api = app.MapGroup("/api/connect");
+        var api = app.MapGroup("/connect");
         
         //default identity
         app.MapGet("~/Account/Login", (HttpContext httpContext) =>
@@ -31,14 +31,16 @@ public static class ConnectEndPoint
     }
     
     private static async Task<IResult> Authorize(
-        [FromBody] LoginModel model, 
         [FromServices] IMediator mediator,
         HttpContext httpContext)
     {
         try
         {
-            await mediator.Send(new IdentityLoginUserCommand(model), httpContext.RequestAborted);
-            return Results.Ok("User authorize");
+            return await mediator.Send(new IdentityLoginUserCommand(), httpContext.RequestAborted);
+        }
+        catch (InvalidOperationException e)
+        {
+            return Results.BadRequest(e.Message);
         }
         catch (Exception e)
         {

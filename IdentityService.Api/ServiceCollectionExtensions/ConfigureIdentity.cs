@@ -1,4 +1,5 @@
 using AuthorizationService.DAL;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using OpenIddict.Abstractions;
 

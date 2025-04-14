@@ -30,6 +30,7 @@ builder.Services.ConfigureDb(builder.Configuration);
 
 // 🔹 Настраиваем Identity
 builder.Services.ConfigureIdentity();
+builder.Services.ConfigureAuthorization();
 
 // 🔹 Настраиваем OpenIddict
 builder.Services.ConfigureOpenIddict();
@@ -56,7 +57,7 @@ app.ConfigureScalar();
 
 // 🔹 Регистрация middleware
 app.UseRouting();
-app.UseAuthentication();     
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Регистрация Endpoints

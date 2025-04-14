@@ -4,4 +4,4 @@ using Microsoft.AspNetCore.Http;
 
 namespace IdentityService.Application.Query.Account;
 
-public record IdentityLoginUserCommand(LoginModel LoginModel) : IRequest<IResult>;
+public record IdentityLoginUserCommand() : IRequest<IResult>;
