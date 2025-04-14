@@ -22,11 +22,6 @@ public static class AuthEndpoint
             .WithDescription("Регистрация пользователя.")
             .AllowAnonymous();
     
-        api.MapPost("/login", LoginAsync)
-            .WithOpenApi()
-            .WithDescription("Авторизация пользователя.")
-            .AllowAnonymous();
-    
         api.MapPost("/refresh", RefreshTokenAsync)
             .WithOpenApi()
             .WithDescription("Обновление токена.")
@@ -56,27 +51,7 @@ public static class AuthEndpoint
         // var result = await userManager.CreateAsync(user, model.Password);
         // return result.Succeeded ? Results.Ok("User registered") : Results.BadRequest(result.Errors);
     }
-
-    private static async Task<IResult> LoginAsync(
-        [FromBody] LoginModel model, 
-        [FromServices] UserManager<IdentityUser> userManager)
-    {
-        var user = await userManager.FindByEmailAsync(model.Email);
-        if (user == null || !await userManager.CheckPasswordAsync(user, model.Password))
-        {
-            return Results.Unauthorized();
-        }
-
-        var identity = new ClaimsIdentity(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-        identity.AddClaim(ClaimTypes.NameIdentifier, user.Id);
-        identity.AddClaim(ClaimTypes.Email, user.Email);
-
-        var principal = new ClaimsPrincipal(identity);
-        principal.SetScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Scopes.Profile, OpenIddictConstants.Scopes.OfflineAccess);
-
-        return Results.SignIn(principal, authenticationScheme: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-    }
-
+    
     private static async Task<IResult> RefreshTokenAsync(HttpContext httpContext)
     {
         var request = httpContext.GetOpenIddictServerRequest();

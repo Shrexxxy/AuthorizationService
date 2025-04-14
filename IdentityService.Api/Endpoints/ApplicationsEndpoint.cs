@@ -1,3 +1,4 @@
+using System.Net;
 using IdentityService.Application.Model;
 using IdentityService.Application.Query;
 using IdentityService.Application.Query.Application;
@@ -31,13 +32,18 @@ public static class ApplicationsEndpoint
             .AllowAnonymous();
         
         api.MapDelete("/", DeleteApplication)
-            .WithDescription("Обновляет приложение по client Id")
+            .WithDescription("Удаляет приложение по client Id")
             //TODO: временно
             .AllowAnonymous();
     }
     
     //TODO: временно
     //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    
+    [ProducesResponseType(statusCode: (int)HttpStatusCode.OK, type: typeof(OkResult))]
+    [ProducesResponseType(statusCode: (int)HttpStatusCode.BadRequest, type: typeof(OkResult))]
+    [ProducesResponseType(statusCode: (int)HttpStatusCode.NotFound, type: typeof(OkResult))]
+    [ProducesResponseType(statusCode: (int)HttpStatusCode.InternalServerError, type: typeof(OkResult))]
     private static async Task<IResult> GetApplication(
         [FromQuery] string clientId,
         [FromHeader] bool? Bff,

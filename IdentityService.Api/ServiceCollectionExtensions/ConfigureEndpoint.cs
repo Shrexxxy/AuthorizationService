@@ -13,5 +13,6 @@ public static partial class ServiceCollectionExtensions
         // Регистрация маршрутов на уровне приложения
         app.MapAuthEndpoints();
         app.MapApplicationsEndpoints();
+        app.MapConnectEndpoints();
     }
 }
