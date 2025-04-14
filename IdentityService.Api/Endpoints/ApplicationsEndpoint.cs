@@ -1,9 +1,11 @@
 using System.Net;
+using AuthorizationService.DAL;
 using IdentityService.Application.Model;
 using IdentityService.Application.Query;
 using IdentityService.Application.Query.Application;
 using IdentityService.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityService.Api.Endpoints;
@@ -12,34 +14,17 @@ public static class ApplicationsEndpoint
 {
     public static void MapApplicationsEndpoints(this IEndpointRouteBuilder app)
     {
-        var api = app.MapGroup("/api/applications")
+        var api = app.MapGroup("/api/superadmin/applications")
             .WithOpenApi();
 
-        
-        api.MapGet("/", GetApplication)
-            .WithDescription("Получает данные приложения по client Id.")
-            //TODO: временно
-            .AllowAnonymous();
-        
-        api.MapPost("/", CreateApplication)
-            .WithDescription("Создает новое приложение на основе переданных данных.")
-            //TODO: временно
-            .AllowAnonymous();
-        
-        api.MapPut("/", UpdateApplication)
-            .WithDescription("Обновляет приложение по client Id")
-            //TODO: временно
-            .AllowAnonymous();
-        
-        api.MapDelete("/", DeleteApplication)
-            .WithDescription("Удаляет приложение по client Id")
-            //TODO: временно
-            .AllowAnonymous();
+
+        api.MapGet("/", GetApplication).WithDescription("Получает данные приложения по client Id.");
+        api.MapPost("/", CreateApplication).WithDescription("Создает новое приложение на основе переданных данных.");
+        api.MapPut("/", UpdateApplication).WithDescription("Обновляет приложение по client Id");
+        api.MapDelete("/", DeleteApplication).WithDescription("Удаляет приложение по client Id");
     }
     
-    //TODO: временно
-    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
-    
+    [Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     [ProducesResponseType(statusCode: (int)HttpStatusCode.OK, type: typeof(OkResult))]
     [ProducesResponseType(statusCode: (int)HttpStatusCode.BadRequest, type: typeof(OkResult))]
     [ProducesResponseType(statusCode: (int)HttpStatusCode.NotFound, type: typeof(OkResult))]
@@ -54,9 +39,8 @@ public static class ApplicationsEndpoint
         var result = await mediator.Send(new IdentityGetApplicationQuery(clientId), httpContext.RequestAborted);
         return Results.Ok(result);
     }
-
-    //TODO: временно
-    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    
+    [Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     private static async Task<IResult> DeleteApplication(
         [FromQuery] string clientId,
         HttpContext httpContext,
@@ -66,8 +50,7 @@ public static class ApplicationsEndpoint
         return Results.Ok();
     }
     
-    //TODO: временно
-    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    [Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     private static async Task<IResult> UpdateApplication(
         [FromQuery] string clientId,
         [FromBody] ApplicationUpdateModel model,
@@ -89,9 +72,8 @@ public static class ApplicationsEndpoint
         }
 
     }
-
-    //TODO: временно
-    //[Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
+    
+    [Authorize(AuthenticationSchemes = AuthData.AuthenticationSchemes, Roles = UserRoles.SuperAdmin)]
     private static async Task<IResult> CreateApplication(
         [FromBody] IdentityCreateApplicationCommand command, 
         [FromServices] IMediator mediator)

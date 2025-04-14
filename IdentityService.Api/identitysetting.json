@@ -1,0 +1,22 @@
+{
+  "IdentitySettings" :
+  {
+    "clientId": "ShrexyPetApplicationClientId",
+    "clientSecret": "ShrexyApp-bw8JcuKZvRx9",
+    "displayName": "ShrexyPetApplication",
+    "consentType": "implicit",
+    "scopes": [
+      "profile",
+      "offline_access",
+      "openid",
+      "email",
+      "phone",
+      "roles",
+      "api"
+    ],
+    "grandTypes": [
+      "refresh_token",
+      "authorization_code"
+    ]
+  }
+}

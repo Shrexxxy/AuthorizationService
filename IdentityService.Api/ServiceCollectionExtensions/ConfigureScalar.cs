@@ -1,3 +1,4 @@
+using IdentityService.Api.Options;
 using Scalar.AspNetCore;
 
 namespace IdentityService.Api.ServiceCollectionExtensions;
@@ -8,6 +9,12 @@ public static partial class ServiceCollectionExtensions
     {
         if (app.Environment.IsDevelopment())
         {
+            var identityConfiguration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("identitysetting.json")
+                .Build();
+            
+            var identitySettings = identityConfiguration.GetSection("IdentitySettings").Get<IdentitySettings>();
             app.MapOpenApi();
 
             app.MapScalarApiReference(options =>
@@ -17,6 +24,14 @@ public static partial class ServiceCollectionExtensions
                     .WithTheme(ScalarTheme.DeepSpace)
                     .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
                     .WithDarkMode(true);
+                
+                options
+                    .WithPreferredScheme("OAuth2") // Security scheme name from the OpenAPI document
+                    .WithOAuth2Authentication(oauth =>
+                    {
+                        oauth.ClientId = identitySettings.ClientId;
+                        oauth.Scopes = identitySettings.Scopes.ToArray();
+                    });
             });
         }
     }

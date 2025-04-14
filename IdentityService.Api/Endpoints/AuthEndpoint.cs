@@ -17,7 +17,7 @@ public static class AuthEndpoint
     {
         var api = app.MapGroup("/api/auth");
 
-        api.MapPost("/register", RegisterAsync)
+        api.MapPost("/superadmin/register", RegisterAsync)
             .WithOpenApi()
             .WithDescription("Регистрация пользователя.")
             .AllowAnonymous();
