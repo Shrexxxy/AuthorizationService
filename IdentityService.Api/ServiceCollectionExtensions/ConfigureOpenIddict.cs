@@ -21,7 +21,6 @@ public static partial class ServiceCollectionExtensions
                 options.SetAuthorizationEndpointUris("/connect/authorize");
 
                 options.AllowAuthorizationCodeFlow()
-                    .RequireProofKeyForCodeExchange()
                     .AllowRefreshTokenFlow();
 
                 options.RegisterScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Scopes.Profile,

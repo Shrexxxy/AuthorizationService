@@ -1,0 +1,28 @@
+@page "/connect/login"
+@model IdentityService.Application.Model.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h1>Вход</h1>
+<form method="post">
+    <div>
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" required />
+    </div>
+    <div>
+        <label for="Password">Пароль:</label>
+        <input type="password" id="Password" name="Password" required />
+    </div>
+    <div>
+        <button type="submit">Войти</button>
+    </div>
+</form>
+</body>
+</html>
